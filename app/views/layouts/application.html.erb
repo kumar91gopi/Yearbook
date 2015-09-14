@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RPVV- YearBook</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+ 
+  <%= csrf_meta_tags %>
+  <!-- Google font -->
+  <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Ubuntu" %>
+  <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
+  <%= render 'layouts/shim' %>
+</head>
+<body>
+    <header>
+        <%= render 'layouts/header' %>
+        <%= render 'layouts/error'%>
+    </header>
+    
+    <main>
+        <%= yield %>
+    </main>
+    
+    
+    
+     <%= render 'layouts/footer' %>
+  
+   
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= debug(params) if Rails.env.development? %>
+    
+</body>
+</html>
