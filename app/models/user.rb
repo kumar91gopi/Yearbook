@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable
          
+          
+         
+  has_one :profile
+  accepts_nested_attributes_for :profile
+         
          
          
         def send_devise_notification(notification, *args)

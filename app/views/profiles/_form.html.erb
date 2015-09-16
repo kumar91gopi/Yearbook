@@ -1,0 +1,55 @@
+<%= form_for(@profile) do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+<%if (current_user.sign_in_count==1)%>
+  <div class="field">
+    <%= f.label :school_id %><br />
+    <%= f.select :school_id, options_from_collection_for_select(School.order(:school_name), :id, :school_name ) %>
+  </div>
+
+  <div class="input-field">
+    <%= f.select(:user_type, Profile.user_types.keys.map {|user_type| [user_type.titleize,user_type]}) %>
+  </div>
+<%end%>
+  
+
+  
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="input-field">
+    <%= f.label :date_of_birth %><br />
+    <%=f.date_field(:date_of_birth, :class => "datepicker")%>
+  </div>
+  <div class="input-field">
+    <%= f.radio_button :gender, "m"  %>
+    <%= f.label :gender_m, "Male" %><br/>
+    <%= f.radio_button :gender, "f" %>
+    <%= f.label :gender_f, "Female" %>
+    <br/>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :about_me %><br>
+    <%= f.text_area :about_me %>
+  </div>
+ 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
