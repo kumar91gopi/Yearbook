@@ -1,0 +1,14 @@
+<div class= "col s2  " style="height: 100vh;" id="sidebar">
+    <ul class="collection with-header" id="abc" >
+        <li class="collection-header">
+          <%= link_to profile_path(user_profile) do%>
+          <%= image_tag user_profile.profile_pic.url, :alt => "Profile Picture", :class => "profile_pic circle responsive-img"%>
+          <h4 class=" teal-text center-align"><%= user_profile.name %></h4>
+          <%end%>
+        </li>
+        <a href="#!" class="collection-item">Yearbook</a>
+        <a href="#!" class="collection-item">Contact requests</a>
+        <%= link_to "Edit Profile",edit_profile_path(user_profile), class: "collection-item"%>
+        <br/>
+    </ul> 
+  </div>

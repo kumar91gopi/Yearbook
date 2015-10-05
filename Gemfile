@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 gem 'rails',        '4.2.2'
 gem 'devise',       '3.4.1'
 gem 'omniauth-facebook' # Facebook authentication
+gem 'carrierwave',  '0.10.0'
+gem 'mini_magick',  '3.8.0'
+gem 'fog',          '1.26.0'
 gem 'sass-rails',   '5.0.2'
 gem 'materialize-sass'
 gem 'autoprefixer-rails'
@@ -11,6 +14,7 @@ gem 'coffee-rails', '4.1.0'
 gem 'jquery-rails', '4.0.3'
 gem 'turbolinks',   '2.3.0'
 gem 'jbuilder',     '2.2.3'
+gem "cocoon"
 gem 'delayed_job_active_record'
 gem 'sdoc',         '0.4.0', group: :doc
 

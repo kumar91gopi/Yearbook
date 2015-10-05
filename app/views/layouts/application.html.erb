@@ -4,14 +4,17 @@
     <title>RPVV- YearBook</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
  
+ 
   <%= csrf_meta_tags %>
   <!-- Google font -->
   <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Ubuntu" %>
   <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
+  <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" %>
   <%= render 'layouts/shim' %>
 </head>
 <body>
     <header>
+        
         <%= render 'layouts/header' %>
         <%= render 'layouts/error'%>
     </header>

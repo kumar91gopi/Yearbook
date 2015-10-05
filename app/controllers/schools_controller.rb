@@ -1,10 +1,18 @@
 class SchoolsController < ApplicationController
   before_action :set_school, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only:[:edit,:update,:destroy]
+  before_action :admin_user, only:[:edit,:update,:destroy]
+  
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.all
+   
+    if params[:search]
+      @schools = School.search(params[:search]).order("school_name")
+    else
+      @schools= School.all.order('school_name')
+    end
+    
   end
 
   # GET /schools/1
@@ -69,6 +77,10 @@ class SchoolsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_params
-      params.require(:school).permit(:school_name, :address, :phone_number, :email)
+      params.require(:school).permit(:school_name, :address, :phone_number, :email, :search)
+    end
+    
+    def admin_user
+      current_user.is_admin?
     end
 end

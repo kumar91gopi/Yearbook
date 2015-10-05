@@ -1,27 +1,32 @@
-(function($){
-  $(function(){
 
+$(document).ready(function() {
+ 
+   //dropdown
+   $(".dropdown-button").dropdown({belowOrigin: true});
+
+   // sidebar
     $('.button-collapse').sideNav();
     $('.parallax').parallax();
 
-  }); // end of document ready
-})(jQuery); // end of jQuery name space
-
-//for dropdowns
-
- $(document).ready(function() {
-    $('select').material_select();
-  });
-  
-  
-  //input form
-  
-  $(document).ready(function() {
-    $('input#input_text, textarea#textarea1').characterCounter();
-  });
-        
-  //date picker
-   $('.datepicker').pickadate({
+    //for dropdowns
+     $('select').material_select();
+     
+      //input form
+     $('input#input_text, textarea#textarea1').characterCounter();
+     
+     //materialbox for image
+     $('.materialboxed').materialbox();
+     
+      //modal
+    $('.modal-trigger').leanModal();  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    
+    
+     //datepicker
+    $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 150 // Creates a dropdown of 15 years to control year
+    
   });
+});
+
+

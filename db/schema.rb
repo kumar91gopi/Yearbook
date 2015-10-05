@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915091320) do
+ActiveRecord::Schema.define(version: 20150923070145) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -29,6 +29,31 @@ ActiveRecord::Schema.define(version: 20150915091320) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
+  create_table "educations", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.string   "institute"
+    t.string   "field"
+    t.date     "from"
+    t.date     "to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "educations", ["profile_id"], name: "index_educations_on_profile_id"
+
+  create_table "occupations", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.string   "company"
+    t.string   "position"
+    t.string   "city"
+    t.date     "from"
+    t.date     "to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "occupations", ["profile_id"], name: "index_occupations_on_profile_id"
+
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -40,6 +65,7 @@ ActiveRecord::Schema.define(version: 20150915091320) do
     t.datetime "updated_at",                null: false
     t.integer  "school_id"
     t.string   "gender"
+    t.string   "profile_pic"
   end
 
   add_index "profiles", ["school_id"], name: "index_profiles_on_school_id"

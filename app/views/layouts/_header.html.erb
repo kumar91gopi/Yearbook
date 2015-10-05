@@ -1,60 +1,35 @@
 <div  class="navbar-fixed">
-  <nav  role="navigation" class="teal z-depth-3">
+  <nav  role="navigation" class="teal">
     <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo">Yearbook</a>
       <ul class="right hide-on-med-and-down">
-         <li><%=link_to "Home",  root_path %></li>
          <% unless user_signed_in? %>
+         <li><%=link_to "Home",  root_path %></li>
          <li><%=link_to "Schools",  schools_path %></li>
-         <%end%>
-          <li><%=link_to "About us",  about_path %></li>
-         <% if user_signed_in? %>
+         <li><%=link_to "About us",  about_path %></li>
+         <li><%=link_to "Sign In",  new_user_session_path %></li>
+         <%else%>
+           
+            <li><%= link_to("My Profile", profile_path( user_profile)) %></li>
+            <li><%=link_to "School buddies",  profiles_path %></li>
              <!-- Dropdown Trigger -->
-          <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-activates="dropdown1"><%=current_user.profile.name%><i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-button" href="#!" data-beloworigin="true" data-activates="dropdown1">
+                <%= user_profile.name%>
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
+          </li>
 
               <!-- Dropdown Structure -->
               <ul id='dropdown1' class='dropdown-content'>
-                <li><a href="#!">one</a></li>
-                <li><a href="#!">two</a></li>
-                <li><%= link_to('Edit Profile',  edit_profile_path(current_user.profile)) %></li>
+                <li><%= link_to('Edit Profile',  edit_profile_path( user_profile)) %></li>
                 <li class="divider"></li>
                 <li><%= link_to('User settings',  edit_user_registration_path) %></li>
                 <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
               </ul>
-         <% else %>
-            <li><%=link_to "Sign In",  new_user_session_path %></li>
-        <% end %>
+         <%end%>
       </ul>
 
-      <ul id="nav-mobile" class="side-nav">
-         <li><%=link_to "Home",  root_path %></li>
-         <%unless user_signed_in?%>
-             <li><%=link_to "Schools",  schools_path %></li>
-         <%end%>
-        <% if user_signed_in? %>
-            <li class="no-padding">
-              <ul class="collapsible collapsible-accordion">
-                <li>
-                  <a class="collapsible-header"><%=current_user.profile.name%><i class="material-icons right">arrow_drop_down</i></a>
-                  <div class="collapsible-body">
-                    <ul>
-                      <li><a href="#!">one</a></li>
-                        <li><a href="#!">two</a></li>
-                        <li><%= link_to('Edit Profile', edit_profile_path(current_user.profile)) %></li>
-                        <li class="divider"></li>
-                        <li><%= link_to('User settings',  edit_user_registration_path) %></li>
-                        <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-            </li>
-         <% else %>
-            <li><%=link_to "Sign In",  new_user_session_path %></li>
-        <% end %>
-          <li><%=link_to "About us",  about_path %></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      <%= render 'layouts/mobile_sidebar'%>
     </div>
   </nav>
 </div>

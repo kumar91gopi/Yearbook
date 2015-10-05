@@ -1,24 +1,25 @@
 <p id="notice"><%= notice %></p>
+<div class="row"> 
+  <div class="col s6 offset-s3" >
+    <div class="card-panel hoverable">
+        <h3 class= "center-align"><%= @school.school_name %></h3>
+        <p>
+          <strong>Address:</strong>
+          <%= @school.address %>
+        </p>
+        
+        <p>
+          <strong>Phone number:</strong>
+          <%= @school.phone_number %>
+        </p>
+        
+        <p>
+          <strong>Email:</strong>
+          <%= @school.email %>
+        </p>
 
-<p>
-  <strong>School name:</strong>
-  <%= @school.school_name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @school.address %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @school.phone_number %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @school.email %>
-</p>
-
-<%= link_to 'Edit', edit_school_path(@school) %> |
-<%= link_to 'Back', schools_path %>
+        <%= link_to 'Edit', edit_school_path(@school) %> |
+        <%= link_to 'Back', schools_path %>
+    </div>
+  </div>
+</div>

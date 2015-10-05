@@ -1,0 +1,26 @@
+<div class="nested-fields">
+    <div class= "field">
+    <%=f.label :company, "Company"%>
+    <%=f.text_field :company%>
+    </div>
+    <div class= "field">
+    <%=f.label :position, "Position"%>
+    <%=f.text_field :position%>
+    </div>
+    <div class= "field">
+    <%=f.label :from%>
+    <%=f.date_select(:from, :discard_day => true, :start_year => 1995, :end_year => 2050,:order => [:day, :month, :year] , prompt: { month: 'Select month', year: 'Select year' }) %>
+    </div>
+    <div class= "field">
+    <%=f.label :to%>
+    <%=f.date_select(:to, :discard_day => true, :start_year => 1995, :end_year => 2050, :order => [:day, :month, :year],  prompt: { month: 'Select month', year: 'Select year' }) %>
+    </div>
+    <div class= "field">
+    <%=f.label :city, "City"%>
+    <%=f.text_field :city%>
+    </div>
+        <%= link_to_remove_association "Remove ", f %>
+    
+     
+    
+</div>

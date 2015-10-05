@@ -9,7 +9,7 @@
  
  
  /* Sticky footer*/
- 
+
  body {
     display: flex;
     min-height: 100vh;
@@ -60,11 +60,47 @@ p {
 
 .icon-block {
   padding: 0 15px;
+ 
 }
 .icon-block .material-icons {
   font-size: inherit;
+  
 }
 
 footer.page-footer {
   margin: 0 !important;
+}
+
+.profile_pic{
+  margin: 0px auto;
+  display: block;
+  max-height:120px; 
+  max-width:120px;
+}
+#profile_pic_other{
+  margin: 5px;
+  float: left;
+  max-height: 160px;
+  max-width: 160px;
+ 
+}
+#abc{
+  margin: 0px !important;
+  height: 100vh;
+}
+.fa-5x {
+    color: teal; 
+    background-color: white !important;
+    padding:5px;
+}
+
+.fa-3x {
+    color: #00838f ; 
+    padding:5px;
+}
+.tabs .indicator {
+  background-color: teal !important;
+}
+#dropdown1 li a {
+  padding: 10px;
 }

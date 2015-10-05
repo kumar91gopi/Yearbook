@@ -7,10 +7,16 @@
           <h5 class="header col s12 light">Its time to share feelings! </h5>
         </div>
         <div class="row center">
-          <% if user_signed_in? %>
-            <%= link_to "Edit registration", edit_user_registration_path,{ class:"btn-large waves-effect waves-light teal lighten-1", id:"download-button"} %>
+          <% unless user_signed_in? %>
+            <%=link_to "Sign Up",  new_user_registration_path ,{ class:"btn-large waves-effect waves-light teal lighten-1", id:"download-button"} %><br/>
+            <h5 class="white-text">Log In with:</h5>
+            <%=link_to new_user_registration_path  do%>
+            <i class="fa fa-facebook-square fa-3x"></i>
+            <i class="fa fa-google-plus-square fa-3x"></i>
+            <i class="fa fa-linkedin-square fa-3x"></i>
+            <%end%>
           <% else %>
-            <%=link_to "Sign Up",  new_user_registration_path ,{ class:"btn-large waves-effect waves-light teal lighten-1", id:"download-button"} %>
+            <h6 class="white-text">Welcome Aboard!!</h6>
           <% end %>
         </div>
         <div class="row center">

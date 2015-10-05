@@ -16,4 +16,4 @@
 !/log/.keep
 /tmp
 # Ignore all initializers and secret
-/config/*
+/config

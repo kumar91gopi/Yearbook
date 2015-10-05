@@ -1,33 +1,50 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Schools</h1>
+<div class="row">
+  <div class="col s4 offset-s4 ">
+       <h1 class="teal-text center-align">Schools</h1>
+    
+    <nav class="grey lighten-3">
+        <div class="nav-wrapper">
+            <%= form_tag(schools_path, :method => "get", id: "search-form") do %>
+                <div class="input-field">
+                    <%= search_field_tag :search, params[:search], placeholder: "Search " %>
+                    <%= submit_tag "Search", :name => nil %><br/>
+                    <label for="search"><i class="material-icons" style="color:teal; padding-left: 10px;">search</i></label>
+                    <i class="material-icons" onclick="">close</i>    
+                </div>
+            <% end %>               
+        </div>
+    </nav>
+  </div>
+</div>
+<div class="row">
+  <div class="col s8 offset-s2 ">
+    <ul class="collection">
+          <li class="collection-item">
+            <%unless @schools.empty?%>
+            <% @schools.each do |school| %>
+            <span class="title"><h5><%= school.school_name.to_s.capitalize %></h5></span>
+            <p><%= school.address %><br/>
+               <%= school.email %><br/>
+               <%= school.phone_number %><br/>
+               <%= link_to 'View', school , {:class => "secondary-content waves-effect waves-light btn"}%>
+              <%if ((user_signed_in? ) && (current_user.is_admin?))%>
+               <%= link_to 'Destroy', school, method: :delete, data: { confirm: 'Are you sure?' } %>
+               <%= link_to 'Edit', edit_school_path(school) %>
+              <%end%>
+              <br/>
+              <br/>
+            </p>
+            <% end %>
+            <%else%>
+                <h4 class="teal-text center-align">No results found</h4>
+                <h6 class="center-align">Please add your School</h6>
+            <%end%>
+          </li>
+    </ul>
+    
+    <%= link_to 'Add your School', new_school_path,{:class => "waves-effect waves-light btn"} %>
 
-<table>
-  <thead>
-    <tr>
-      <th>School name</th>
-      <th>Address</th>
-      <th>Phone number</th>
-      <th>Email</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @schools.each do |school| %>
-      <tr>
-        <td><%= school.school_name %></td>
-        <td><%= school.address %></td>
-        <td><%= school.phone_number %></td>
-        <td><%= school.email %></td>
-        <td><%= link_to 'Show', school %></td>
-        <td><%= link_to 'Edit', edit_school_path(school) %></td>
-        <td><%= link_to 'Destroy', school, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New School', new_school_path %>
+ </div>
+</div>

@@ -1,41 +1,123 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <%if current_user==@profile.user%>
-  <strong>User:</strong>
-  <%= @profile.user %>
+<div class= "row" >
+   <!-- sidebar section -->
+  <%unless is_current_user(@profile)%>
+    <%= render 'layouts/sidebar'%>
   <%end%>
-</p>
+  
+  
+   <!-- Profile section -->
+  <%if is_current_user(@profile)%>
+    <div class= "col s12 m12 l9 offset-l1">
+  <%else%>
+    <div class= "col s9">
+  <%end%>
+  
+      <div class ="container">
+        
+           <!-- Profile card section -->
+          <div class="card-panel hoverable" style="border-top: 1px solid  #009688; border-bottom: 1px solid  #009688; min-height:250px;">
+            <div class="right">
+              <%= link_to 'Sign Yearbook', edit_profile_path(@profile)%><br/>
+              <%= link_to 'Request to Contact', edit_profile_path(@profile)%>
+            </div>
+            <div class="row">
+              <div class="col s4" style="padding-right: 0px; padding-left: 0px;">
+                <div class="img_container" style="overflow: hidden; padding-right: 0px;">
+                  <%= image_tag @profile.profile_pic.url, :alt => "Profile Picture", :class => "responsive-img", :id => "profile_pic_other"%>
+                </div>
+              </div>
+              <div class="col s5" style="padding-right: 0px;">
+                <h5 class><%= @profile.name %></h5>
+                <%=@profile.user_type%> at <%= @profile.school.school_name%>
+                  <p>
+                    <%= @profile.city %>
+                  </p>
+              </div>
+            </div>
+          </div>
+          <div class="card-panel hoverable" style="padding: 0px; border-top: 1px solid  #009688;">
+              <ul class="tabs">
+                <li class="tab col s3"><a class="active teal-text" href="#test1">Profile</a></li>
+                <li class="tab col s3"><a class="teal-text" href="#test2">Yearbook</a></li>
+                <li class="tab col s3"><a class="teal-text" href="#test3">Test 3</a></li>
+                <li class="tab col s3"><a class="teal-text" href="#test4">Test 4</a></li>
+              </ul>
+          </div>
+          
+           <!-- Basic Info section -->
+          <div class="user">
+            <div class="card-panel hoverable" style="border-top: 1px solid #009688;">
+              <h5 class="center-align teal-text">User</h5>
+              <p>
+                <strong>About me:</strong>
+                <%= @profile.about_me %>
+              </p>
+              <p>
+                <strong>Date of birth:</strong>
+                <%= @profile.date_of_birth %>
+              </p>
+              <p>
+                <strong>School:</strong>
+                <%unless @profile.school_id.nil?%>
+                <%= @profile.school.school_name %>
+                <%end%>
+              </p>
+            </div>
+          </div>
+          
+           <!-- Education section -->
+          <div class="education">
+            <div style="margin-top:10px;margin-bottom: -40px;, margin-left:auto; margin-left:auto;display:block;" class="center-align">
+              <i class="fa fa-graduation-cap fa-5x"></i>
+            </div>
+            <div class="card-panel hoverable" style="border-top: 1px solid #009688;">
+              <h5 class="center-align teal-text">Education</h5>
+                <strong>School:</strong>
+                <%@profile.educations.each do |education|%>
+                  <h5><%=education.institute%></h5>
+                  <ul>
+                    <li><%=education.field%></li>
+                    <li><%=education.from%></li>
+                    <li><%=education.to%></li>
+                  </ul>
+                <%end%>
+                <%unless @profile.school_id.nil?%>
+                  <h5><%= @profile.school.school_name %></h5>
+                <%end%>
+            </div>
+          </div>
+          
+          <!-- Occupation section -->
+          <div class="occupation">
+            <div style="margin-top:10px;margin-bottom: -40px;, margin-left:auto; margin-left:auto;display:block;" class="center-align">
+              <i class="fa fa-briefcase fa-5x"></i>
+            </div>
+            <div class="card-panel hoverable" style="border-top: 1px solid #009688;">
+              <h5 class="center-align teal-text">Occupation</h5>
+                <strong>Occupation:</strong>
+                <%@profile.occupations.each do |occupation|%>
+                  <h5><%=occupation.company%></h5>
+                  <ul>
+                    <li><%=occupation.position%></li>
+                    <li><%=occupation.from%></li>
+                    <li><%=occupation.to%></li>
+                  </ul>
+                <%end%>
+            </div>
+          </div>
+        
+        
+       
+        
+        <%= link_to 'Edit', edit_profile_path(@profile) %> |
+        <%= link_to 'Back', profiles_path %>
+      </div>
+    </div>
+    
+    
+    <div class= "col s1"> 
+    
+    </div>
+  
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @profile.name %>
-</p>
-
-<p>
-  <strong>Date of birth:</strong>
-  <%= @profile.date_of_birth %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @profile.city %>
-</p>
-
-<p>
-  <strong>About me:</strong>
-  <%= @profile.about_me %>
-</p>
-
-<p>
-  <strong>User type:</strong>
-  <%= @profile.user_type %>
-</p>
-
-<p>
-  <strong>School:</strong>
-  <%= @profile.school.school_name %>
-</p>
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>

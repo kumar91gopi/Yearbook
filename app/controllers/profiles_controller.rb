@@ -1,12 +1,19 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :admin_user, only: [:new ,:destroy]
   before_action :prepare_schools
  
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+  
+    if params[:search]
+      @profiles = Profile.search(params[:search]).order("name")
+    else
+      @profiles = Profile.where(school_id: current_user.profile.school_id).order('name')
+    end
+    
   end
 
   # GET /profiles/1
@@ -21,9 +28,23 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
- 
+    unless @profile.educations.blank?
+      @profile.educations.each do |education|
+        education ||= education_build
+      end
+    else
+      @profile.educations.build
+    end
+    
+    unless @profile.occupations.blank?
+      @profile.occupations.each do |occupation|
+        occupation ||= occupation_build
+      end
+    else
+      @profile.occupations.build
+    end
+     
   end
-
   # POST /profiles
   # POST /profiles.json
   def create
@@ -72,13 +93,17 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:user_id, :name, :date_of_birth, :city, :about_me, :user_type, :school_id,:gender)
+      params.require(:profile).permit(:user_id, :name, :date_of_birth, :city, :about_me, :user_type, :school_id,:gender, :profile_pic,
+                                      :educations_attributes =>[:id,:institute,:field,:from,:to, :_destroy],
+                                      :occupations_attributes =>[:id,:company,:position,:city,:from,:to, :_destroy])
     end
     
     def prepare_schools
       @schools = School.all
     end
     
-   
+    def admin_user
+      current_user.is_admin?
+    end
     
 end
