@@ -7,7 +7,7 @@
   
    <!-- Profile section -->
   <%if is_current_user(@profile)%>
-    <div class= "col s12 m12 l9 offset-l1">
+    <div class= "col s12 m12 l10">
   <%else%>
     <div class= "col s9">
   <%end%>
@@ -16,14 +16,20 @@
         
            <!-- Profile card section -->
           <div class="card-panel hoverable" style="border-top: 1px solid  #009688; border-bottom: 1px solid  #009688; min-height:250px;">
-            <div class="right">
-              <%= link_to 'Sign Yearbook', edit_profile_path(@profile)%><br/>
-              <%= link_to 'Request to Contact', edit_profile_path(@profile)%>
-            </div>
+            <%unless user_profile== @profile%>
+              <div class="right">
+                <%if ((@profile.user_type == "Student") ||  (@profile.user_type == "Ex_student"))%>
+                  <%= link_to 'Sign Yearbook', yearbook_profile_path(@profile)%><br/>
+                <%else%>
+                  <%= link_to 'Say Thanks!', yearbook_profile_path(@profile)%><br/>
+                <%end%>
+                <%= link_to 'Request to Contact', edit_profile_path(@profile)%>
+              </div>
+            <%end%>
             <div class="row">
-              <div class="col s4" style="padding-right: 0px; padding-left: 0px;">
+              <div class="col s3" style="padding-right: 0px; padding-left: 0px;">
                 <div class="img_container" style="overflow: hidden; padding-right: 0px;">
-                  <%= image_tag @profile.profile_pic.url, :alt => "Profile Picture", :class => "responsive-img", :id => "profile_pic_other"%>
+                  <%= image_tag display_pic(@profile), :alt => "Profile Picture", :class => "responsive-img", :id => "profile_pic_other"%>
                 </div>
               </div>
               <div class="col s5" style="padding-right: 0px;">
@@ -35,12 +41,13 @@
               </div>
             </div>
           </div>
+          <!--tabs navigation bar-->
           <div class="card-panel hoverable" style="padding: 0px; border-top: 1px solid  #009688;">
               <ul class="tabs">
-                <li class="tab col s3"><a class="active teal-text" href="#test1">Profile</a></li>
-                <li class="tab col s3"><a class="teal-text" href="#test2">Yearbook</a></li>
-                <li class="tab col s3"><a class="teal-text" href="#test3">Test 3</a></li>
-                <li class="tab col s3"><a class="teal-text" href="#test4">Test 4</a></li>
+                <li class="tab col s3"><%= link_to 'Profile', profile_path(@profile),class: "teal-text", target: "_blank"%></li>
+                <li class="tab col s3"><%= link_to 'Yearbook', yearbook_profile_path(@profile),class: "teal-text", target: "_blank"%></li>
+                <li class="tab col s3"><a class="teal-text" href="#test3">Classmates</a></li>
+                <li class="tab col s3"><a class="teal-text" href="#test4">Messages</a></li>
               </ul>
           </div>
           

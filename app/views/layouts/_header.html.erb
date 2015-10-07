@@ -1,7 +1,11 @@
 <div  class="navbar-fixed">
   <nav  role="navigation" class="teal">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo">Yearbook</a>
+        <%unless user_signed_in? %>
+            <%=link_to "Yearbook",  root_path , class:"brand-logo",id:"logo-container"%>
+        <%else%>
+            <%=link_to "Yearbook",  profile_path( user_profile) , class:"brand-logo",id:"logo-container"%>
+        <%end%>
       <ul class="right hide-on-med-and-down">
          <% unless user_signed_in? %>
          <li><%=link_to "Home",  root_path %></li>
@@ -28,7 +32,17 @@
               </ul>
          <%end%>
       </ul>
-
+      <ul>
+    <%if user_signed_in?%>
+      <li class="right">
+      <span class="hide-on-large-only"><%= link_to destroy_user_session_path, :method => :delete do %><i class="fa fa-sign-out"></i><%end%></span>
+      </li>
+    <%else%>
+      <li class="right">
+      <span class="hide-on-large-only"><%= link_to new_user_session_path do %><i class="fa fa-sign-in"></i><%end%></span>
+      </li>
+    <%end%>
+      </ul>
       <%= render 'layouts/mobile_sidebar'%>
     </div>
   </nav>

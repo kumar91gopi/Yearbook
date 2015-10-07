@@ -2,11 +2,11 @@
     <ul class="collection with-header" id="abc" >
         <li class="collection-header">
           <%= link_to profile_path(user_profile) do%>
-          <%= image_tag user_profile.profile_pic.url, :alt => "Profile Picture", :class => "profile_pic circle responsive-img"%>
-          <h4 class=" teal-text center-align"><%= user_profile.name %></h4>
+          <%= image_tag display_pic(user_profile), :alt => "Profile Picture", :class => "profile_pic circle responsive-img"%>
+          <h5 class=" teal-text center-align"><%= user_profile.name %></h5>
           <%end%>
         </li>
-        <a href="#!" class="collection-item">Yearbook</a>
+        <%= link_to 'My Yearbook', yearbook_profile_path(user_profile), class: "collection-item"%>
         <a href="#!" class="collection-item">Contact requests</a>
         <%= link_to "Edit Profile",edit_profile_path(user_profile), class: "collection-item"%>
         <br/>

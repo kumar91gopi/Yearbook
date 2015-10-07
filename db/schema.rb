@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923070145) do
+ActiveRecord::Schema.define(version: 20151005235909) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -60,12 +60,13 @@ ActiveRecord::Schema.define(version: 20150923070145) do
     t.date     "date_of_birth"
     t.string   "city"
     t.text     "about_me"
-    t.integer  "user_type",     default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "user_type",          default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "school_id"
     t.string   "gender"
     t.string   "profile_pic"
+    t.string   "remote_profile_pic"
   end
 
   add_index "profiles", ["school_id"], name: "index_profiles_on_school_id"
@@ -98,6 +99,8 @@ ActiveRecord::Schema.define(version: 20150923070145) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_admin",               default: false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

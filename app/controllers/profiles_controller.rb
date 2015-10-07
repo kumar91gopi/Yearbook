@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :yearbook]
   before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:new ,:destroy]
   before_action :prepare_schools
  
@@ -9,7 +10,7 @@ class ProfilesController < ApplicationController
   def index
   
     if params[:search]
-      @profiles = Profile.search(params[:search]).order("name")
+      @profiles = Profile.where(school_id: current_user.profile.school_id).search(params[:search]).order("name")
     else
       @profiles = Profile.where(school_id: current_user.profile.school_id).order('name')
     end
@@ -84,6 +85,10 @@ class ProfilesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def yearbook
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -93,7 +98,7 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:user_id, :name, :date_of_birth, :city, :about_me, :user_type, :school_id,:gender, :profile_pic,
+      params.require(:profile).permit(:user_id, :name, :date_of_birth, :city, :about_me, :user_type, :school_id,:gender, :profile_pic,:remove_profile_pic,
                                       :educations_attributes =>[:id,:institute,:field,:from,:to, :_destroy],
                                       :occupations_attributes =>[:id,:company,:position,:city,:from,:to, :_destroy])
     end
@@ -103,7 +108,15 @@ class ProfilesController < ApplicationController
     end
     
     def admin_user
-      current_user.is_admin?
+       unless current_user.is_admin?
+        redirect_to current_user.profile
+       end
+    end
+    
+    def correct_user
+       unless (current_user.profile==@profile)
+        redirect_to current_user.profile
+       end
     end
     
 end

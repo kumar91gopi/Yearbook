@@ -16,11 +16,16 @@
         <h5 class="teal-text">User Details</h5>
         <!-- Basic user info-->
         <div class="upload-preview">
-          <%= image_tag @profile.profile_pic.url, :alt => "Profile Picture", :class => "responsive-img materialboxed", :style=> "max-height:300px ; max-width: 300px;"%>
+          <%= image_tag display_pic(@profile), :alt => "Profile Picture", :class => "responsive-img materialboxed", :style=> "max-height:300px ; max-width: 300px;"%>
         </div>
         <div class="input-field">
           <%= f.file_field :profile_pic, :accept => 'image/jpeg,image/gif,image/png', :class => 'file'%>
           <br/>
+        </div>
+         <div class="field">
+              <%= f.check_box :remove_profile_pic %>
+              <%= f.label :remove_profile_pic, "remove image" %>
+            <br/>
         </div>
          <div class="input-field">
           <%= f.label :name %><br>

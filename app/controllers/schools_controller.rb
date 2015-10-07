@@ -81,6 +81,8 @@ class SchoolsController < ApplicationController
     end
     
     def admin_user
-      current_user.is_admin?
+      unless current_user.is_admin?
+       redirect_to schools_url
+      end
     end
 end

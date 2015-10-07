@@ -3,23 +3,21 @@
              <li><%=link_to "Home",  root_path %></li>
              <li><%=link_to "Schools",  schools_path %></li>
              <li><%=link_to "About us",  about_path %></li>
-             <li><%=link_to "Sign In",  new_user_session_path %></li>
          <%else%>
               <li class="logo">
-                  <%= link_to(image_tag user_profile.profile_pic.url, :alt => "Profile Picture", \
+                  <%= link_to(image_tag display_pic(user_profile), :alt => "Profile Picture", \
                                       :class => "profile_pic circle responsive-img") %><br/>
                   <%= link_to(user_profile.name, profile_path( user_profile), class: "center-align") %>
               </li>
               <li class="no-padding">
               <ul class="collapsible collapsible-accordion">
                 <li>
-                  <a class="collapsible-header"><%= user_profile.name%><i class="material-icons right">arrow_drop_down</i></a>
+                  <a class="collapsible-header">Settings<i class="material-icons right">arrow_drop_down</i></a>
                   <div class="collapsible-body">
                     <ul>
                         <li><%= link_to('Edit Profile', edit_profile_path( user_profile)) %></li>
                         <li class="divider"></li>
-                        <li><%= link_to('User settings',  edit_user_registration_path) %></li>
-                        <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+                        <li><%= link_to('Password settings',  edit_user_registration_path) %></li>
                     </ul>
                   </div>
                 </li>

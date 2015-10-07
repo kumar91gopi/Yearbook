@@ -20,13 +20,19 @@ $(document).ready(function() {
       //modal
     $('.modal-trigger').leanModal();  // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     
+     //tabs
+      $('ul.tabs').tabs();
+    
     
      //datepicker
     $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 150 // Creates a dropdown of 15 years to control year
+ 
     
   });
 });
 
 
+
+        

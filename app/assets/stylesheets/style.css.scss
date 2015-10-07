@@ -98,9 +98,24 @@ footer.page-footer {
     color: #00838f ; 
     padding:5px;
 }
+
+.fa-3x:hover{
+    color:#bdbdbd;
+    transition: 0.3s;
+    -webkit-transform: rotateX(360deg);
+    font-size:60px;
+}
+
+
 .tabs .indicator {
   background-color: teal !important;
 }
 #dropdown1 li a {
   padding: 10px;
 }
+
+
+
+
+ 
+    
