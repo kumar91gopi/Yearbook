@@ -2,8 +2,8 @@ development:
   facebook_key: "712552512183686"
   facebook_secret: "aaf0747bf0101c9bc6a37e222c8aaaa9"
 
-  twitter_key: "xFDBKDiHShDI5ZlkoPcnBlron"
-  twitter_secret: "cW8QEsNrs6ga73OLjabVHx1pYpm5W9URWddOFbGyHtcLhIjMxa"
+  twitter_key: "vFiNSHEQgwIvagUz6LghylxMZ"
+  twitter_secret: "eQOgysz1VxX4DeBWLoR9frFeUZ6Nl6CGXdh7q5QnjNnAInFwDH"
 
   github_key: "YOUR_KEY"
   github_secret: "YOUR_SECRET"
@@ -24,7 +24,7 @@ production:
   github_key: "YOUR_KEY"
   github_secret: "YOUR_SECRET"
 
-  linkedin_key: "Y75mz23ol23erkn"
+  linkedin_key: "75mz23ol23erkn"
   linkedin_secret: "u4YOzdt8hmCU7vkR"
 
   google_key: "238121301591-6c6qaeljaiu5qjdbq18374bvkjejhq4d.apps.googleusercontent.com"
