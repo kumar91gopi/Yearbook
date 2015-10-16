@@ -20,6 +20,9 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    unless (@profile.school_id == current_user.profile.school_id)
+      redirect_to current_user.profile
+    end
   end
 
   # GET /profiles/new
@@ -87,7 +90,13 @@ class ProfilesController < ApplicationController
   end
   
   def yearbook
-    
+    if (@profile.school_id == current_user.profile.school_id)
+     @signature = current_user.profile.signatures.build
+     session[:my_info]=@profile.id
+     @signs=@profile.signs
+    else
+      redirect_to current_user.profile
+    end
   end
 
   private

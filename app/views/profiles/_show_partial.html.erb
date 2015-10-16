@@ -1,0 +1,61 @@
+<!-- Basic Info section -->
+<div class="user">
+    <div class="card-panel hoverable" style="border-top: 1px solid #009688;">
+        <h5 class="center-align teal-text">User</h5>
+        <p>
+        <strong>About me:</strong>
+        <%= @profile.about_me %>
+        </p>
+        <p>
+        <strong>Date of birth:</strong>
+        <%= @profile.date_of_birth %>
+        </p>
+        <p>
+        <strong>School:</strong>
+        <%unless @profile.school_id.nil?%>
+        <%= @profile.school.school_name %>
+        <%end%>
+        </p>
+    </div>
+</div>
+
+<!-- Education section -->
+<div class="education">
+    <div style="margin-top:10px;margin-bottom: -40px;, margin-left:auto; margin-left:auto;display:block;" class="center-align">
+      <i class="fa fa-graduation-cap fa-5x"></i>
+    </div>
+    <div class="card-panel hoverable" style="border-top: 1px solid #009688;">
+      <h5 class="center-align teal-text">Education</h5>
+        <strong>School:</strong>
+        <%@profile.educations.each do |education|%>
+          <h5><%=education.institute%></h5>
+          <ul>
+            <li><%=education.field%></li>
+            <li><%=education.from%></li>
+            <li><%=education.to%></li>
+          </ul>
+        <%end%>
+        <%unless @profile.school_id.nil?%>
+          <h5><%= @profile.school.school_name %></h5>
+        <%end%>
+    </div>
+</div>
+
+<!-- Occupation section -->
+<div class="occupation">
+    <div style="margin-top:10px;margin-bottom: -40px;, margin-left:auto; margin-left:auto;display:block;" class="center-align">
+      <i class="fa fa-briefcase fa-5x"></i>
+    </div>
+    <div class="card-panel hoverable" style="border-top: 1px solid #009688;">
+      <h5 class="center-align teal-text">Occupation</h5>
+        <strong>Occupation:</strong>
+        <%@profile.occupations.each do |occupation|%>
+          <h5><%=occupation.company%></h5>
+          <ul>
+            <li><%=occupation.position%></li>
+            <li><%=occupation.from%></li>
+            <li><%=occupation.to%></li>
+          </ul>
+        <%end%>
+    </div>
+</div>

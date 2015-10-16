@@ -40,6 +40,7 @@
             <br/>
           </div>
           <div class="input-field">
+            <%= f.label "You Are" %><br />
             <%= f.select(:user_type, Profile.user_types.keys.map {|user_type| [user_type.titleize,user_type]}, :include_blank => "Please select") %>
             <br/>
           </div>

@@ -1,1 +1,42 @@
-<%= @profile.name%>
+<div class= "row" >
+   <!-- sidebar section -->
+  <%unless is_current_user(@profile)%>
+    <%= render 'layouts/sidebar'%>
+  <%end%>
+  
+  
+   <!-- Profile section -->
+<%if is_current_user(@profile)%>
+  <div class= "col s12 m12 l10">
+<%else%>
+  <div class= "col s9">
+  <%end%>
+  
+    <div class ="container">
+  
+     <!-- Profile card section -->
+      <%= render 'profile_card'%>
+      
+      <!--tabs navigation bar-->
+      <%= render 'tabs_nav'%>
+      
+      <!--Yearbook partial (rendering posts)-->
+      <%= render 'yearbook_partial'%>
+
+    </div>
+  </div>
+    
+    
+      <div class= "col s1"> 
+    
+      </div>
+</div>
+
+<script type="text/javascript">
+  $('#tagged_image').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 3) {
+      alert('Maximum file size is 3MB. Please choose a smaller file.');
+    }
+  });
+</script>

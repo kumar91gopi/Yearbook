@@ -13,10 +13,15 @@
             <%=link_to user_omniauth_authorize_path(:facebook)  do%>
             <i class="fa fa-facebook-square fa-3x"></i>
             <%end%>
+            <%=link_to user_omniauth_authorize_path(:linkedin)  do%>
             <i class="fa fa-linkedin-square fa-3x"></i>
+            <%end%>
+            <%=link_to user_omniauth_authorize_path(:google_oauth2)  do%>
             <i class="fa fa-google-plus-square fa-3x"></i>
+            <%end%>
+            <%=link_to user_omniauth_authorize_path(:twitter)  do%>
             <i class="fa fa-twitter-square fa-3x"></i>
-            
+            <%end%>
           <% else %>
             <h6 class="white-text">Welcome Aboard!!</h6>
           <% end %>
@@ -57,7 +62,7 @@
             <h5 class="center">Be besties once more</h5>
 
             <p class="light">
-              >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam 
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam 
               scelerisque id nunc 
               nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. 
              

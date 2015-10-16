@@ -74,16 +74,17 @@ footer.page-footer {
 .profile_pic{
   margin: 0px auto;
   display: block;
-  max-height:120px; 
-  max-width:120px;
+  height:120px; 
+  width:120px;
 }
 #profile_pic_other{
   margin: 5px;
   float: left;
-  max-height: 160px;
-  max-width: 160px;
+  height: 160px;
+  width: 160px;
  
 }
+
 #abc{
   margin: 0px !important;
   height: 100vh;
@@ -101,9 +102,18 @@ footer.page-footer {
 
 .fa-3x:hover{
     color:#bdbdbd;
-    transition: 0.3s;
-    -webkit-transform: rotateX(360deg);
     font-size:60px;
+}
+
+.fa-2x {
+    color: #00838f ; 
+    padding:5px;
+    
+}
+
+.fa-2x:hover{
+    color:#bdbdbd ;
+    font-size:40px;
 }
 
 
@@ -115,7 +125,14 @@ footer.page-footer {
 }
 
 
-
+.collection {
+  overflow: visible;
+}
 
  
-    
+.messages {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}

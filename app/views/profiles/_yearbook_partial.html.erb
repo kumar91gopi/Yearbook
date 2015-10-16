@@ -1,0 +1,68 @@
+<%unless is_current_user(@profile)%>
+    <%if has_signed(@profile)%>
+    <div class="card-panel hoverable">
+        <%= form_for(@signature) do |f| %>
+          <div class="input-field">
+            <%if ((@profile.user_type == "Student") ||  (@profile.user_type == "Ex_student"))%>
+                <%= f.text_area :content, placeholder:  "Sign #{@profile.name}'s yearbook..."%>
+            <%else%>
+                 <%= f.text_area :content, placeholder:  "Say a warm thanks to #{@profile.name}..."%>
+            <%end%>
+          </div>
+          <div class="input-field">
+            <%= f.file_field :image, :accept => 'image/jpeg,image/gif,image/png', :class => 'file'%>
+          <br/>
+          </div>
+          <%= f.submit "Post", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+    <%end%>
+<%end%>
+
+<div class="posts">
+        <div style="margin-top:10px;margin-bottom: -40px;, margin-left:auto; margin-left:auto;display:block;" class="center-align">
+         <i class="fa fa-commenting-o fa-5x"></i>
+        </div>
+      <%unless @signs.empty?%>
+        <% @signs.each do |sign| %>
+        <div class="card-panel hoverable" >
+             <p class="teal-text right-align" style="font-size:0.8em;">Posted <%= time_ago_in_words(sign.created_at) %> ago.</p>
+        <div  style="position:relative;">
+            <div class="post_info" style="position:absolute;right:10px;top:10px;">
+                
+                <% if  is_current_user(@profile) %>
+                <a class='dropdown-button' href='#' data-activates='dropdown_post' data-alignment="top"><i class="fa fa-cog"></i></a>
+                <ul id='dropdown_post' class='dropdown-content'>
+                    <li><a href="#!">one</a></li>
+                    <li><a href="#!">Only me</a></li>
+                    <li><%= link_to "Delete", sign, method: :delete,
+                                                   data: { confirm: "You sure?" } %></li>
+                 </ul>
+                <% end %>
+            </div>
+            <div class="signer_info">
+                <%= link_to profile_path(sign.profile) do%>
+                <%= image_tag display_pic(sign.profile), :alt => "user picture", :class => "circle responsive-img  " , :style=> " float:left;max-height:60px; max-width:60px;margin-right:10px;"%>
+                <h6 style="font-size:1.3em;"><%=sign.profile.name%></h6>signed yearbook!
+                <%end%><br/>
+            </div>
+            <div class="signer_content">
+                <p><%=sign.content%></p>
+                <%unless sign.image.blank?%>
+                <%= image_tag sign.image.url, :alt => "Picture", :class => "responsive-img"%>
+                <%end%><br/>
+            </div>
+            
+        </div>
+        </div>
+        <%end%>
+      <%else%>
+          <div class="card-panel hoverable" style="min-height:300px;">
+               <h5 class="center-align teal-text">Nobody has signed this yearbook yet!</h5>
+          </div>
+      <%end%>
+</div> 
+    
+
+    
+   

@@ -23,4 +23,5 @@ class ApplicationController < ActionController::Base
     edit_profile_path(current_user.profile)
   end
   
+  
 end

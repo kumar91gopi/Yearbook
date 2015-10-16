@@ -1,6 +1,10 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
   belongs_to :school
+  has_many :signatures, dependent: :destroy
+  has_many :signs, :class_name => 'Signature', :foreign_key => 'yearbook_id', dependent: :destroy
+  
+
   validates :name, presence: true,  length: { maximum: 50 }
   validates :user_type, presence: true, :on => :update
   validates :school_id, presence: true, :on => :update
@@ -32,5 +36,5 @@ class Profile < ActiveRecord::Base
     def self.search(query)
           where("name like ?", "%#{query}%") 
     end
-      
+  
 end

@@ -27,8 +27,8 @@
             <%unless @profiles.empty?%>
             <% @profiles.each do |profile| %>
               <%unless user_profile==profile%>
-                <span class="title"><h5><%= link_to profile.name, profile %></h5></span>
-                <%= image_tag profile.profile_pic.url, :alt => "Profile Picture", :class => "responsive-img circle "%>
+                <span class="title"><h6><%= link_to profile.name, profile %></h6></span>
+                <%= image_tag display_pic(profile), :alt => "Profile Picture", :class => "circle responsive-img  "%>
                 <div>
                   <%= profile.user_type%>
                 <p><%= profile.user.email %>

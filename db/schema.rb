@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005235909) do
+ActiveRecord::Schema.define(version: 20151015051124) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 20151005235909) do
   end
 
   add_index "educations", ["profile_id"], name: "index_educations_on_profile_id"
+
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id"
 
   create_table "occupations", force: :cascade do |t|
     t.integer  "profile_id"
@@ -81,6 +91,21 @@ ActiveRecord::Schema.define(version: 20151005235909) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "signatures", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "yearbook_id"
+    t.text     "content"
+    t.string   "image"
+    t.boolean  "is_hidden",   default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "signatures", ["profile_id", "yearbook_id"], name: "index_signatures_on_profile_id_and_yearbook_id", unique: true
+  add_index "signatures", ["profile_id"], name: "index_signatures_on_profile_id"
+  add_index "signatures", ["yearbook_id", "created_at"], name: "index_signatures_on_yearbook_id_and_created_at"
+  add_index "signatures", ["yearbook_id"], name: "index_signatures_on_yearbook_id"
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -99,8 +124,6 @@ ActiveRecord::Schema.define(version: 20151005235909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_admin",               default: false
-    t.string   "provider"
-    t.string   "uid"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
