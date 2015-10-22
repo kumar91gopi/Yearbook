@@ -1,24 +1,33 @@
+<div class="row"> 
+  <div class="col s6 offset-s2">
+    <h2 class="center-align">Editing Profile</h2>
+  </div>
+</div>
+<div class="row"> 
+  <div class="col s6 offset-s2 card-panel hoverable">
+    <ul class="tabs">
+        <li class="tab col s3"><a href="#user_details">User </a></li>
+        <li class="tab col s3"><a href="#education_details">Education</a></li>
+        <li class="tab col s3"><a href="#occupation_details">Occupation</a></li>
+        <li class="tab col s3"><a href="#other_info">Other</a></li>
+      </ul>
+  </div>
+</div>
 
 <div class="row"> 
   <div class="col s6 offset-s2">
-     <div class="card-panel hoverable">
-        <h1 id="user_details">Editing Profile</h1>
-
-        <%= render 'form' %>
-        
-        <%= link_to 'Show', @profile %> |
-        <%= link_to 'Back', profiles_path %>
-     </div>
-    </div>
-    
-    <div class="col s2">
+    <%= render 'form' %>
+  </div>
+  <div class="col s2">
     <div class="toc-wrapper">
-    <div style="height: 1px;">
-      <ul class="section table-of-contents">
-        <li><a href="#user_details">Basic Info</a></li>
-        <li><a href="#education_details">Basic Info</a></li>
-        <li><a href="#occupation_details">Basic Info</a></li>
-        <li><a href="#other_info">Basic Info</a></li>
-      </ul>
+      <div style="height: 1px;">
+        <ul class="section table-of-contents">
+          <li><a href="#user_details">User Information</a></li>
+          <li><a href="#education_details">Education Details</a></li>
+          <li><a href="#occupation_details">Occupation Details</a></li>
+          <li><a href="#other_info">Other Information</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

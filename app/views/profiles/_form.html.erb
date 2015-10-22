@@ -1,109 +1,116 @@
-
-      <%= form_for(@profile, html: {multipart: true}) do |f| %>
-      <% if @profile.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-    
-          <ul>
-          <% @profile.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-    
-      <div id="user_details">
-        <h5 class="teal-text">User Details</h5>
-        <!-- Basic user info-->
-        <div class="upload-preview">
-          <%= image_tag display_pic(@profile), :alt => "Profile Picture", :class => "responsive-img materialboxed", :style=> "max-height:300px ; max-width: 300px;"%>
-        </div>
-        <div class="input-field">
-          <%= f.file_field :profile_pic, :accept => 'image/jpeg,image/gif,image/png', :class => 'file'%>
-          <br/>
-        </div>
-         <div class="field">
-              <%= f.check_box :remove_profile_pic %>
-              <%= f.label :remove_profile_pic, "remove image" %>
-            <br/>
-        </div>
-         <div class="input-field">
-          <%= f.label :name %><br>
-          <%= f.text_field :name %>
-          <br/>
-        </div>
-        <!--School id and user type -->
-        <% unless (@profile.school_id.nil? && @profile.user_type.nil?) %>
-          <div class="field">
-            <%= f.label :school_id %><br />
-            <%= f.collection_select( :school_id, School.order(:school_name), :id, :school_name ,:include_blank => "Please select") %>
-            <br/>
-          </div>
-          <div class="input-field">
-            <%= f.label "You Are" %><br />
-            <%= f.select(:user_type, Profile.user_types.keys.map {|user_type| [user_type.titleize,user_type]}, :include_blank => "Please select") %>
-            <br/>
-          </div>
-        <%end%>
-        <!--end of school is and user type field-->
-        <div class="input-field">
-          <%= f.label :date_of_birth %><br />
-          <%=f.date_field(:date_of_birth, :class => "datepicker", :include_blank => "Please select")%>
-          <br/>
-        </div>
-        <div class="input-field">
-          <%= f.radio_button :gender, "m"%>
-          <%= f.label :gender_m, "Male" %>
-          <%= f.radio_button :gender, "f" %>
-          <%= f.label :gender_f, "Female" %>
-          <br/>
-        </div>
-        <br/>
-      </div>
-      
-      <!-- education info-->
-      <div id="education_details">
-        <h5 class="teal-text">Education</h5>
-          <div class= "input-fields">
-           <%= f.fields_for :educations, @educations do |ff|%>
-             <%= render 'education_fields', :f => ff %>
-           <%end%>
-          </div>
-           <div class= "links">
-           <%= link_to_add_association 'add education', f, :educations %>
-           </div>
-      </div>
-      
-      <!-- Occupation info-->
-      <div id="occupation_details">
-        <h5 class="teal-text">Occupation</h5>
-          <div class= "input-fields">
-           <%= f.fields_for :occupations, @occupations do |ff|%>
-             <%= render 'occupation_fields', :f => ff %>
-           <%end%>
-          </div>
-          <div class= "links">
-           <%= link_to_add_association 'Add occupation', f, :occupations %>
-          </div>
-      </div>
-    
-        
-       
-      <div id="other_info"> 
-        <div class="field">
-          <%= f.label :city %><br>
-          <%= f.text_field :city %>
-        </div>
-        <div class="field">
-          <%= f.label :about_me %><br>
-          <%= f.text_area :about_me %>
-        </div>
-      </div>
-      
-      <div class="actions">
-        <%= f.submit %>
+<%= form_for(@profile, html: {multipart: true}) do |f| %>
+  <div class="card-panel hoverable" id="user_details">
+       <!-- Errors-->
+    <% if @profile.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+        <ul>
+        <% @profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
       </div>
     <% end %>
+    
+    <h5 class="teal-text">User Details</h5>
+    <!-- Basic user info-->
+    
+    <!--Profile picture-->
+    <div class="profile_pic_upload">
+      <div class="upload-preview">
+        <%= image_tag display_pic(@profile), :alt => "Profile Picture", :class => "responsive-img", :style=> "max-height:200px ; max-width: 200px;"%>
+      </div>
+      <%unless current_user.profile.profile_pic.blank?%>
+      <div class="input-field">
+          <%= f.check_box :remove_profile_pic %>
+          <%= f.label :remove_profile_pic, "remove image" %>
+      </div>
+      <%end%>
+      <div class="input-field">
+        <%= f.file_field :profile_pic, :accept => 'image/jpeg,image/gif,image/png', :class => 'file'%>
+        <br/>
+      </div>
+    </div>
+    <br/>
+    <div class="input-field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+      <br/>
+    </div>
+      <!--School id and user type -->
+    <% if (@profile.school_id.blank? || @profile.user_type.blank?) %>
+      <div class="field">
+        <%= f.label "School*" %><br />
+        <%= f.collection_select( :school_id, School.order(:school_name), :id, :school_name ,:include_blank => "Please select") %>
+        <br/>
+      </div>
+      <div class="input-field">
+        <%= f.label "You Are*" %><br />
+        <%= f.select(:user_type, Profile.user_types.keys.map {|user_type| [user_type.titleize,user_type]}, :include_blank => "Please select") %>
+        <br/>
+      </div>
+    <%end%>
+      <!--end of school is and user type field-->
+    <div class="input-field">
+      <%= f.label :date_of_birth %><br />
+      <%=f.date_field(:date_of_birth, :class => "datepicker", :include_blank => "Please select")%>
+      <br/>
+    </div>
+     <%= f.label "Sex*" %>
+    <div class="input-field">
+      <%= f.radio_button :gender, "m"%>
+      <%= f.label :gender_m, "Male" %><br/>
+      <%= f.radio_button :gender, "f" %>
+      <%= f.label :gender_f, "Female" %>
+      <br/>
+    </div>
+    <br/>
+    <a href="#education_details" class="waves-effect waves-light btn"><i class="material-icons right">navigate_next</i>Next</a>
+  </div>
+  
+      <!-- education info-->
+  <div class="card-panel hoverable"  id="education_details">
+    <h5 class="teal-text">Education Details</h5>
+      <div class= "input-fields">
+       <%= f.fields_for :educations, @educations do |ff|%>
+         <%= render 'education_fields', :f => ff %>
+       <%end%>
+      </div>
+      <div class= "links">
+       <%= link_to_add_association 'add education', f, :educations %>
+      </div>
+       <a href="#occupation_details" class="waves-effect waves-light btn"><i class="material-icons right">navigate_next</i>Next</a>
+  </div>  
+  
+      <!-- Occupation info-->
+  <div class="card-panel hoverable" id="occupation_details">
+    <h5 class="teal-text">Occupation Details</h5>
+      <div class= "input-fields">
+       <%= f.fields_for :occupations, @occupations do |ff|%>
+         <%= render 'occupation_fields', :f => ff %>
+       <%end%>
+      </div>
+      <div class= "links">
+       <%= link_to_add_association 'Add occupation', f, :occupations %>
+      </div>
+       <a href="#other_info" class="waves-effect waves-light btn"><i class="material-icons right">navigate_next</i>Next</a>
+  </div>
+        
+  <div class="card-panel hoverable" id="other_info"> 
+    <h5 class="teal-text">Other Details</h5>
+    <div class="field">
+      <%= f.label "Current city" %><br>
+      <%= f.text_field :city %>
+    </div>
+    <div class="field">
+      <%= f.label :about_me %><br>
+      <%= f.text_area :about_me %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>
 
 
 

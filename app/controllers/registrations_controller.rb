@@ -11,8 +11,16 @@ class RegistrationsController < Devise::RegistrationsController
     super
   end
   
+  protected
 
- 
+     def after_update_path_for(resource)
+        profile_path(current_user.profile)
+     end
+     
+     def update_resource(resource, params)
+        resource.update_without_password(params)
+     end
+     
   private
    
      
