@@ -1,7 +1,12 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Yearbook is a Ruby on Rails social network for schools where students ,ex students,teachers,principal and other employees come to a platform where they can be in touch and can get support if they need.
+
+This application uses:
+
+DEVISE Gem for authentication
+OMNIAUTH Gem for social login
+
 
 Things you may want to cover:
 
