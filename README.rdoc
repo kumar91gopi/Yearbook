@@ -1,27 +1,28 @@
-== README
+== Yearbook
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Yearbook is a Ruby on Rails social network for schools where students ,ex students,teachers,principal and other employees come to a platform where they can be in touch and can get support if they need.
 
-Things you may want to cover:
+This application uses:
 
-* Ruby version
+* Ruby  2.2.1
 
-* System dependencies
+* Rails 4.2.2 
 
-* Configuration
+* DEVISE Gem for authentication
 
-* Database creation
+* OMNIAUTH Gem for social login
+
+* Materialize-sass Gem for front-end
+
+* SQLite in developement and Postgres in production
 
 * Database initialization
-
-* How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
 
-* ...
+*...This application is deployed on Heroku
 
 
 Please feel free to use a different markup language if you do not plan to run
