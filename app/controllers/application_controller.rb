@@ -11,6 +11,14 @@ class ApplicationController < ActionController::Base
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
   
+  
+  def logged_using_omniauth? request
+    res = nil
+    omniauth = request.env["omniauth.auth"]
+    res = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid']) if omniauth
+    res  
+  end
+  
   protected
   
   def after_sign_in_path_for(resource)

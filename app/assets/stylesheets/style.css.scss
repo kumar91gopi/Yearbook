@@ -125,14 +125,10 @@ footer.page-footer {
 }
 
 
-.collection {
-  overflow: visible;
+.tabs .tab a {
+  color: teal !important;
 }
 
- 
-.messages {
-  max-height: 400px;
-  overflow-y: auto;
-  margin-bottom: 1em;
-  margin-top: 1em;
+.tabs .indicator {
+  background-color: teal !important;
 }

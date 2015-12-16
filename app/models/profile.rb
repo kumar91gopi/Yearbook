@@ -13,7 +13,7 @@ class Profile < ActiveRecord::Base
   validates :city,  length: { maximum: 100 }
   validate  :picture_size
   
-  enum user_type: [:Student, :Ex_student, :Teacher, :Principal, :Other]
+  enum user_type: [:Student, :Teacher, :Principal, :Other]
   has_many :educations, :dependent => :destroy
   accepts_nested_attributes_for :educations,
                                   :allow_destroy => true,

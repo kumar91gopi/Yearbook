@@ -8,10 +8,12 @@ Rails.application.routes.draw do
   resources :profiles do
     member do
       get 'yearbook'
+      get 'classmate'
     end
   end
   resources :schools
   resources :signatures,          only: [:create, :destroy]
+  
   
   
   devise_for :users , :controllers => { :omniauth_callbacks => "omniauth_callbacks" , registrations: "registrations"},skip: :registrations

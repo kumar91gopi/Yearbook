@@ -9,11 +9,11 @@
     </div>
     <div class= "field">
     <%=f.label :from%>
-    <%=f.date_select(:from, :discard_day => true, :start_year => 1995, :order => [:day, :month, :year], :include_blank => "Please select") %>
+    <%= f.select :from, (1947..Time.now.year).to_a, :include_blank => "Select year" %>
     </div>
     <div class= "field">
     <%=f.label :to%>
-    <%=f.date_select(:to, :discard_day => true, :start_year => 1995, :order => [:day, :month, :year],  :include_blank => "Please select") %>
+    <%= f.select :to, (1947..Time.now.year).to_a, :include_blank => "Select year" %>
     </div>
      <%= link_to_remove_association "Remove ", f %>
 </div>

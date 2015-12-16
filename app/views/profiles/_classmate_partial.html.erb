@@ -1,0 +1,37 @@
+<div class="classmates">
+        <div style="margin-top:10px;margin-bottom: -40px;, margin-left:auto; margin-left:auto;display:block;" class="center-align">
+         <i class="fa fa-commenting-o fa-5x"></i>
+        </div>
+    <ul class="collection">
+          <li class="collection-item avatar">
+            <%unless @classmates.empty?%>
+            <% @classmates.each do |profile| %>
+              <%unless @profile==profile%>
+                <span class="title"><h6><%= link_to profile.name, profile %></h6></span>
+                <%= image_tag display_pic(profile), :alt => "Profile Picture", :class => "circle responsive-img  "%>
+                <div>
+                  <%= profile.user_type%>
+                <p><%= profile.user.email %>
+                <%= profile.date_of_birth %>
+                <%= profile.city %>
+                </p>
+                </div>
+              <%end%>
+            <%end%>
+            <%if ((@classmates.count ==1) && (@profile.user_type == "Student"))%> <h4 class="teal-text center-align">Sorry! None of your classmates have joined Almanet yet.</h4> <%end%>
+         <%end%>
+         
+            <% if  @profile.batch.blank?  %> 
+             <%unless @profile.user_type == "Student"%>
+               <h4 class="teal-text center-align">Sorry! None of your colleague has joined Almanet yet.</h4> 
+             <%else%>
+               <h4 class="teal-text center-align">Sorry! You have not specified your batch yet.</h4> 
+             <%end%>
+            <%end%>
+         
+    </ul>
+</div> 
+    
+
+    
+   

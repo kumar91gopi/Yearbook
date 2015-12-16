@@ -3,7 +3,7 @@
     <div class="card-panel hoverable">
         <%= form_for(@signature) do |f| %>
           <div class="input-field">
-            <%if ((@profile.user_type == "Student") ||  (@profile.user_type == "Ex_student"))%>
+            <%if (@profile.user_type == "Student")%>
                 <%= f.text_area :content, placeholder:  "Sign #{@profile.name}'s yearbook..."%>
             <%else%>
                  <%= f.text_area :content, placeholder:  "Say a warm thanks to #{@profile.name}..."%>

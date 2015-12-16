@@ -36,6 +36,7 @@
       <%= f.label :name %><br>
       <%= f.text_field :name %>
       <br/>
+      <%= f.select :batch, (1947..Time.now.year).to_a, :include_blank => "Select year" %>
     </div>
       <!--School id and user type -->
     <% if (@profile.school_id.blank? || @profile.user_type.blank?) %>
@@ -65,7 +66,7 @@
       <br/>
     </div>
     <br/>
-    <a href="#education_details" class="waves-effect waves-light btn"><i class="material-icons right">navigate_next</i>Next</a>
+    <a id="education_button"class="waves-effect waves-light btn" onclick="next_page('education');"><i class="material-icons right">navigate_next</i>Next</a>
   </div>
   
       <!-- education info-->
@@ -79,7 +80,7 @@
       <div class= "links">
        <%= link_to_add_association 'add education', f, :educations %>
       </div>
-       <a href="#occupation_details" class="waves-effect waves-light btn"><i class="material-icons right">navigate_next</i>Next</a>
+      <a id="occupation_button"class="waves-effect waves-light btn" onclick="next_page('occupation');"><i class="material-icons right">navigate_next</i>Next</a>
   </div>  
   
       <!-- Occupation info-->
@@ -93,7 +94,7 @@
       <div class= "links">
        <%= link_to_add_association 'Add occupation', f, :occupations %>
       </div>
-       <a href="#other_info" class="waves-effect waves-light btn"><i class="material-icons right">navigate_next</i>Next</a>
+       <a id="other_button"class="waves-effect waves-light btn" onclick="next_page('other');"><i class="material-icons right">navigate_next</i>Next</a>
   </div>
         
   <div class="card-panel hoverable" id="other_info"> 
@@ -116,13 +117,12 @@
 
 
 
-<script type="text/javascript">
-  $('#profile_profile_pic').bind('change', function() {
-    var size_in_megabytes = this.files[0].size/1024/1024;
-    if (size_in_megabytes > 3) {
-      alert('Maximum file size is 3MB. Please choose a smaller file.');
-    }
-  });
+<script type="text/javascript" >
+
+  function next_page(id) {
+    console.log('sdfsd');
+    document.getElementById(id).click();
+  }
   
   $(document).ready(function(){
     var preview = $(".upload-preview img");
@@ -137,5 +137,14 @@
        };
        reader.readAsDataURL(file);
     });
+    
+    
+    $('#profile_profile_pic').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 3) {
+      alert('Maximum file size is 3MB. Please choose a smaller file.');
+    }
+  });
+
 });
 </script>

@@ -2,7 +2,7 @@
   
   <%unless user_profile== @profile%>
     <div class="right">
-      <%if ((@profile.user_type == "Student") ||  (@profile.user_type == "Ex_student"))%>
+      <%if (@profile.user_type == "Student")%>
         <%= link_to 'Sign Yearbook', yearbook_profile_path(@profile)%><br/>
       <%else%>
         <%= link_to 'Say Thanks!', yearbook_profile_path(@profile)%><br/>
@@ -20,6 +20,7 @@
       <div class="col s5" style="padding-right: 0px;">
         <h5 class><%= @profile.name %></h5>
         <%=@profile.user_type%> at <%= @profile.school.school_name%>
+        <%= @profile.batch%>
          <p>
           <%= @profile.city %>
          </p>

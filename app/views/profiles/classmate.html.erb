@@ -1,0 +1,34 @@
+<div class= "row" >
+   <!-- sidebar section -->
+  <%unless is_current_user(@profile)%>
+    <%= render 'layouts/sidebar'%>
+  <%end%>
+  
+  
+   <!-- Profile section -->
+<%if is_current_user(@profile)%>
+  <div class= "col s12 m12 l10">
+<%else%>
+  <div class= "col s9">
+  <%end%>
+  
+    <div class ="container">
+  
+     <!-- Profile card section -->
+      <%= render 'profile_card'%>
+      
+      <!--tabs navigation bar-->
+      <%= render 'tabs_nav'%>
+      
+      <!--Yearbook partial (rendering posts)-->
+      <%= render 'classmate_partial'%>
+
+    </div>
+  </div>
+    
+    
+      <div class= "col s1"> 
+    
+      </div>
+</div>
+

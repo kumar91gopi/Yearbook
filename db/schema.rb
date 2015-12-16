@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016003054) do
+ActiveRecord::Schema.define(version: 20151104073912) do
 
   create_table "educations", force: :cascade do |t|
     t.integer  "profile_id"
     t.string   "institute"
     t.string   "field"
-    t.date     "from"
-    t.date     "to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "from"
+    t.integer  "to"
   end
 
   add_index "educations", ["profile_id"], name: "index_educations_on_profile_id"
@@ -40,10 +40,10 @@ ActiveRecord::Schema.define(version: 20151016003054) do
     t.string   "company"
     t.string   "position"
     t.string   "city"
-    t.date     "from"
-    t.date     "to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "from"
+    t.integer  "to"
   end
 
   add_index "occupations", ["profile_id"], name: "index_occupations_on_profile_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20151016003054) do
     t.string   "gender"
     t.string   "profile_pic"
     t.string   "remote_profile_pic"
+    t.integer  "batch"
   end
 
   add_index "profiles", ["school_id"], name: "index_profiles_on_school_id"

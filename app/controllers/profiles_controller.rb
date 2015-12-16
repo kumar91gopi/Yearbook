@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy, :yearbook]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :yearbook, :classmate]
   before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:new ,:destroy]
@@ -98,6 +98,14 @@ class ProfilesController < ApplicationController
       redirect_to current_user.profile
     end
   end
+  
+  def classmate
+    if (@profile.user_type == "Student")
+     @classmates = Profile.where("school_id= ? AND batch= ? ",@profile.school_id, @profile.batch).order('name')
+    else
+      @classmates = Profile.where.not(user_type:'Student')
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -107,7 +115,7 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:user_id, :name, :date_of_birth, :city, :about_me, :user_type, :school_id,:gender, :profile_pic,:remove_profile_pic,
+      params.require(:profile).permit(:user_id, :name, :date_of_birth, :city, :about_me, :user_type, :school_id, :batch, :gender, :profile_pic,:remove_profile_pic,
                                       :educations_attributes =>[:id,:institute,:field,:from,:to, :_destroy],
                                       :occupations_attributes =>[:id,:company,:position,:city,:from,:to, :_destroy])
     end
